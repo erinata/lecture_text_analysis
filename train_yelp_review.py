@@ -1,5 +1,13 @@
 import json
 import pandas as pd
+import string
+
+import nltk
+
+from nltk.corpus import stopwords
+nltk.download('stopwords')
+
+from nltk.stem import WordNetLemmatizer
 
 review_text = []
 review_stars = []
@@ -24,5 +32,13 @@ print(dataset.shape)
 data = dataset['text']
 target = dataset['stars']
 
+lemmatizer = WordNetLemmatizer()
 
+def pre_processing(text):
+	text_processed = [char for char in text if char not in string.punctuation]
+	text_processed = ''.join(text_processed)
+	return [lemmatizer.lemmatize(word) for word in text_processed.split() if lemmatizer.lemmatize(word) not in stopwords.words('english')]
+
+
+print(pre_processing("This is some text. Hello!!! This is pretending to be a review! Reviews are funny."))
 
