@@ -9,6 +9,8 @@ nltk.download('stopwords')
 
 from nltk.stem import WordNetLemmatizer
 
+from sklearn.feature_extraction.text import CountVectorizer
+
 review_text = []
 review_stars = []
 with open('yelp_review_part.json') as f:
@@ -41,4 +43,22 @@ def pre_processing(text):
 
 
 print(pre_processing("This is some text. Hello!!! This is pretending to be a review! Reviews are funny."))
+
+count_vectorize_transformer = CountVectorizer(analyzer=pre_processing).fit(data)
+
+print(count_vectorize_transformer.get_feature_names())
+
+data = count_vectorize_transformer.transform(data)
+
+
+
+
+
+
+
+
+
+
+
+
 
