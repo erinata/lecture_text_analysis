@@ -13,4 +13,16 @@ dataset = pd.DataFrame(data = {'text': review_text, 'stars' : review_stars})#, c
 
 print(dataset.shape)
 
+dataset = dataset[0:3000]
+
+print(dataset.shape)
+
+dataset = dataset[(dataset['stars']==1)|(dataset['stars']==5)]
+
+print(dataset.shape)
+
+data = dataset['text']
+target = dataset['stars']
+
+
 
